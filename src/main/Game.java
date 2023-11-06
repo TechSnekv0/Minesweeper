@@ -15,6 +15,7 @@ public class Game {
     private Map map;
 
     private MouseHandler mouseHandler;
+    private LoadSave loadSave = new LoadSave();
 
     private boolean gameOver;
     
@@ -35,9 +36,11 @@ public class Game {
     }
 
     public Game(MouseHandler mouseHandler) {
+        System.out.println("new game");
+
         this.mouseHandler = mouseHandler;
 
-        atlas = LoadSave.LoadAssets();
+        atlas = loadSave.LoadAssets();
         map = new Map();
     }
 
@@ -82,7 +85,7 @@ public class Game {
 
         ArrayBlockingQueue<int[]> showQueue = new ArrayBlockingQueue<int[]>(9999999);
 
-        if (mouseHandler.isFlagClicked()) {
+        if (mouseHandler.isFlagClicked() && !gameOver && !gameWon) {
             int i = mouseHandler.getMouseX()/TILESIZE;
             int j = mouseHandler.getMouseY()/TILESIZE;
             
@@ -93,6 +96,7 @@ public class Game {
                 else map.getGrid()[i][j].setType(HIDDEN);
             }
 
+            
             mouseHandler.setFlagClicked(false);
         }
 

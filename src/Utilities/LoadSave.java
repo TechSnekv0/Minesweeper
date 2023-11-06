@@ -1,9 +1,8 @@
 package Utilities;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class LoadSave {
     
@@ -11,12 +10,17 @@ public class LoadSave {
 
     }
 
-    public static BufferedImage LoadAssets() {
+    public BufferedImage LoadAssets() {
 
         BufferedImage atlas = null;
 
         try {
-            atlas = ImageIO.read(new File(System.getProperty("user.dir") + "/res/minesweeper_atlas.png"));
+            ImageIcon image = new ImageIcon(getClass().getClassLoader().getResource("minesweeper_atlas.png"));
+            atlas = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+            Graphics g = atlas.getGraphics();
+            image.paintIcon(null, g, 0, 0);
+
+            // atlas = ImageIO.read(new File(System.getProperty("user.dir") + "/minesweeper_atlas.png"));
         } catch (Exception e) {
             System.out.println(e);
         }

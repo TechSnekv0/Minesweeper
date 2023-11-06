@@ -41,13 +41,21 @@ public class App {
             }
 
             if (game.isGameOver() || game.isGameWon()) {
-                if (mouseHandler.isFlagClicked()) {
-                    game = new Game(mouseHandler);
-                    window.setTitle("Minesweeper");
-                    mouseHandler.setFlagClicked(false);
+                System.out.println("gameover");
+
+                while (!mouseHandler.isFlagClicked()){
+                    long endtime = System.currentTimeMillis() + 1;
+                    while (System.currentTimeMillis() < endtime) {
+                        screen.repaint();
+                    }
                 }
+
+                System.out.println("resetting");
+                window.setTitle("Resetting...");
+                mouseHandler.setFlagClicked(false);
+                game = new Game(mouseHandler);
+                window.setTitle("Minesweeper");
             }
-            System.out.println("running");
 
         }
 

@@ -48,6 +48,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener{
     @Override
     public void mousePressed(MouseEvent e) {
         flagClicked = true;
+        System.out.println("clicked");
         button = e.getButton();
     }
 
